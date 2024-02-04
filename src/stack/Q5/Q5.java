@@ -7,76 +7,57 @@ public class Q5 {
     /**
      * 스택 정렬: 가장 작은 값이 위로 오도록 스택을 정렬하는 프로그램을 작성하라.
      * 추가적으로 하나 정도의 스택은 사용해도 괜찮지만, 스택에 보관된 요소를 배열 등의 다른 자료구조로 복사할 수는 없다.
-     * 스택은 push, pop, peek, isEmpty의 네 가지 연산을 제공해야 한다
+     * 스택은 push, pop, peek, isEmpty 의 네 가지 연산을 제공해야 한다
      */
     public static void main(String[] args) {
         Stack<Integer> s = new Stack<Integer>();
+        System.out.println("정렬 전");
+
+        // 정렬 전 값 랜덤으로 입력
         for (int i = 0; i < 10; i++) {
             int r = ThreadLocalRandom.current().nextInt(0,  1000);
+            System.out.print(r + ", ");
             s.push(r);
         }
 
+        // 정렬
         sort(s);
+        System.out.println();
+        System.out.println("정렬 후");
 
+        // 정렬된 값 출력
         while(!s.isEmpty()) {
-            System.out.println(s.pop());
+            System.out.print(s.pop() + ", ");
         }
     }
 
-    public static Stack<Integer> mergesort(Stack<Integer> inStack) {
-        if (inStack.size() <= 1) {
-            return inStack;
-        }
+    /**
+     * 스택 정렬 함수
+     */
+    public static void sort(Stack<Integer> rawStack) {
 
-        Stack<Integer> left = new Stack<Integer>();
-        Stack<Integer> right = new Stack<Integer>();
-        int count = 0;
-        while (!inStack.isEmpty()) {
-            count++;
-            if (count % 2 == 0) {
-                left.push(inStack.pop());
-            } else {
-                right.push(inStack.pop());
+        // 정렬된 값을 담을 스택
+        Stack<Integer> sortedStack = new Stack<Integer>();
+
+        // 1. 스택의 모든 값을 비교하며 sortedStack 에 담는다.
+        while(!rawStack.isEmpty()) {
+            // 스택의 값을 꺼낸다.
+            int tmp = rawStack.pop();
+
+            // sortedStack 에 있는 값을 비교한다.
+            // sortedStack 의 값이 더 크다면 다시 꺼내서 rawStack 에 담는다.
+            while(!sortedStack.isEmpty() && sortedStack.peek() > tmp) {
+                rawStack.push(sortedStack.pop());
             }
+
+            // 더 이상 큰 값이 없다면, sorted 스택에 담는다.
+            sortedStack.push(tmp);
         }
 
-        left = mergesort(left);
-        right = mergesort(right);
-
-        while (!left.isEmpty() || !right.isEmpty()) {
-            if (left.isEmpty()) {
-                inStack.push(right.pop());
-            } else if (right.isEmpty()) {
-                inStack.push(left.pop());
-            } else if (right.peek().compareTo(left.peek()) <= 0) {
-                inStack.push(left.pop());
-            } else {
-                inStack.push(right.pop());
-            }
+        // 2. 정렬된 스택을 다시 원래 스택에 꺼내서 담는다.
+        while (!sortedStack.isEmpty()) {
+            rawStack.push(sortedStack.pop());
         }
-
-        Stack<Integer> reverseStack = new Stack<Integer>();
-        while (!inStack.isEmpty()) {
-            reverseStack.push(inStack.pop());
-        }
-
-        return reverseStack;
     }
 
-    public static void sort(Stack<Integer> s) {
-        Stack<Integer> r = new Stack<Integer>();
-        while(!s.isEmpty()) {
-            /* Insert each element in s in sorted order into r. */
-            int tmp = s.pop();
-            while(!r.isEmpty() && r.peek() > tmp) {
-                s.push(r.pop());
-            }
-            r.push(tmp);
-        }
-
-        /* Copy the elements back. */
-        while (!r.isEmpty()) {
-            s.push(r.pop());
-        }
-    }
 }
