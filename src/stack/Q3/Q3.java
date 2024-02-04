@@ -8,13 +8,24 @@ public class Q3 {
      * setOfStacks.push() 와 SetOfStacks.pop() 은 스택이 하나인 경우와 동일하게 동작해야 한다 (다시 말해, pop()은 정확히 하나의 스택이 있을 때와 동일한 값을 반환해야 한다).
      */
     public static void main(String[] args) {
+
+        // 하나의 스택의 크기
         int capacity_per_substack = 5;
-        SetOfStacks set = new SetOfStacks(capacity_per_substack);
-        for (int i = 0; i < 34; i++) {
-            set.push(i);
+
+        // 크기가 5인 SetOfStacks 생성
+        SetOfStacks setOfStacks = new SetOfStacks(capacity_per_substack);
+
+        for (int i = 0; i < 10; i++) {
+            setOfStacks.push(i);
+            System.out.println("Pushed " + i);
         }
-        for (int i = 0; i < 35; i++) {
-            System.out.println("Popped " + set.pop());
+
+        System.out.println("-------------------------------------------");
+
+        for (int i = 0; i < 10; i++) {
+            if (!setOfStacks.isEmpty()) {
+                System.out.println("Popped " + setOfStacks.pop());
+            }
         }
     }
 }
