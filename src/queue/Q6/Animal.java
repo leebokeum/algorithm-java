@@ -1,7 +1,13 @@
 package queue.Q6;
 
+/**
+ * 동물 클래스 (최상위 부모 클래스)
+ */
 public abstract class Animal {
-	private int order; 
+	// 순서
+	private int order;
+
+	// 동물 이름
 	protected String name;
 	public Animal(String n) {
 		name = n;
