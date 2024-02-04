@@ -1,2 +1,10 @@
-package stack.Q2;public class NodeWithMin {
+package stack.Q2;
+
+class NodeWithMin {
+    public int value;
+    public int min;
+    public NodeWithMin(int v, int min){
+        value = v;
+        this.min = min;
+    }
 }

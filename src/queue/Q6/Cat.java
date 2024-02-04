@@ -1,4 +1,4 @@
-package stack.Q6;
+package queue.Q6;
 
 public class Cat extends Animal {
 	public Cat(String n) {
