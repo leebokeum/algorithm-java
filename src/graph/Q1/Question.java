@@ -3,7 +3,8 @@ package graph.Q1;
 import java.util.LinkedList;
 
 /**
- * 노드 사이의 경로: 방향 그래프가 주어졌을 때 두 노드 사이에 경로가 존재 하는지 확인하는 알고리즘을 작성하라.
+ * 노드 사이의 경로:
+ *  방향 그래프가 주어졌을 때 두 노드 사이에 경로가 존재 하는지 확인하는 알고리즘을 작성하라.
  */
 public class Question {
 	public enum State {
