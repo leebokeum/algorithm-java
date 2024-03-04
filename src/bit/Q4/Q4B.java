@@ -2,6 +2,11 @@ package bit.Q4;
 
 import bit.BitUtils;
 
+/**
+ * 문제
+ * 양의 정수가 하나 주어졌다.
+ * 이 숫자를 2진수로 표기했을때 1비트의 개수가 같은 숫자중에서 주어진 수보다 크지만 가장 작은 수와, 작지만 가장 큰 수를 구하여라 .
+ */
 public class Q4B {
 	
 	public static int getNext(int n) {

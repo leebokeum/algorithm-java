@@ -1,5 +1,10 @@
 package bit.Q3;
 
+/**
+ * 문제
+ * 어떤 정수가 주어졌을때 여러분은 이 정수의 비트 하나에 0에서 1로 바꿀 수 있다.
+ * 이때 1이 연속으로 나올 수 있는 가장 긴 길이를 구하는 코드를 작성하라.
+ **/
 public class Q3D {
 
 	public static int flipBit(int a) {
