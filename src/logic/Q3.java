@@ -11,14 +11,14 @@ public class Q3 {
     public static void main(String[] args) {
         int[][] chessboard = new int[CHESS_SIZE][CHESS_SIZE];
 
-        // 대각선 양 끝 을 2로 설정
-        chessboard[0][CHESS_SIZE-1] = 2;
-        chessboard[CHESS_SIZE-1][0] = 2;
-
-        // 채스판 마주보는 대각선을 1로 채우기
+        // 채스판 전체를 0과 1로 번갈아 가며 채우기
         fillChessboard(chessboard);
 
-        // 체스판 출력
+        // 문제에서 삭제할 공간을 -1로 설정 (삭제된 공간은 -1이라고 간주한다)
+        chessboard[0][CHESS_SIZE-1] = -1;
+        chessboard[CHESS_SIZE-1][0] = -1;
+
+        // 체스판 출력하여 눈으로 보기
         printChessboard(chessboard);
 
 
@@ -32,27 +32,45 @@ public class Q3 {
 
 
     private static boolean isDominoPlacementPossible(int[][] chessboard) {
-        int countOne = 0;
+        int count0 = 0;
+        int count1 = 0;
+
         for (int[] row : chessboard) {
             for (int cell : row) {
+                if (cell == 0) {
+                    count0++;
+                    continue;
+                }
+
                 if (cell == 1) {
-                    countOne++;
+                    count1++;
                 }
             }
         }
 
-        // "1"의 개수가 31보다 크면 false
-        return countOne <= DOMINO_SIZE;
+        System.out.println("0의 갯수" + count0);
+        System.out.println("1의 갯수" + count1);
+
+        // 0의 갯수 또는 1의 갯수가 DOMINO_SIZE 보다 큰것이 있다면 false
+        if (count0 > DOMINO_SIZE ) {
+            return false;
+        }
+
+        if (count1 > DOMINO_SIZE ) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * 체스의 마주보는 대각선을 1로 채운다.
+     * 체스 전체를 0 과 1로 번갈아 가며 채운다.
      */
     private static void fillChessboard(int[][] chessboard) {
         for (int i = 0; i < chessboard.length; i++) {
             for (int j = 0; j < chessboard[i].length; j++) {
                 if ((i + j) % 2 == 0) {
-                    chessboard[i][j] = 1; // 대각선 "1"로 채우기
+                    chessboard[i][j] = 1;
                 }
             }
         }
